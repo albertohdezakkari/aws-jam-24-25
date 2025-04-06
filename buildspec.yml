@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Instalando dependencias (si aplica)"
+  build:
+    commands:
+      - echo "Construyendo el proyecto (si aplica)"
+  post_build:
+    commands:
+      - echo "Desplegando a EC2..."
+      - echo "$PEM_KEY" > devops.pem
+      - chmod 400 devops.pem
+      - scp -o StrictHostKeyChecking=no -i devops.pem -r 1-devops/index.html ec2-user@35.180.88.222:/var/www/html/
+
+artifacts:
+  files:
+    - 1-devops/index.html
