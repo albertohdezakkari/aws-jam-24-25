@@ -3,12 +3,13 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Instalando dependencias (si hay)"
+      - echo "Instalando dependencias (si las hay)"
   build:
     commands:
-      - echo "Preparando archivos para despliegue"
+      - echo "Compilando o preparando la app"
   post_build:
     commands:
       - echo "$PEM_KEY" > devops.pem
       - chmod 400 devops.pem
-      - scp -o StrictHostKeyChecking=no -i devops.pem -r * ec2-user@IP_EC2:/var/www/html/app
+      - echo "Desplegando en EC2..."
+      - scp -o StrictHostKeyChecking=no -i devops.pem -r * ec2-user@35.180.88.222:~/app
