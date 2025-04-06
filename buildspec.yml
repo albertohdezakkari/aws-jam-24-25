@@ -14,6 +14,7 @@ phases:
       - chmod 400 devops.pem
       - scp -o StrictHostKeyChecking=no -i devops.pem -r 1-devops/index.html ec2-user@35.180.88.222:/var/www/html/
 
+
 artifacts:
   files:
     - 1-devops/index.html
