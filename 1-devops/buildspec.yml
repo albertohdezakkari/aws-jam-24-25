@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Instalando dependencias (si hay)"
+  build:
+    commands:
+      - echo "Preparando archivos para despliegue"
+  post_build:
+    commands:
+      - echo "$PEM_KEY" > devops.pem
+      - chmod 400 devops.pem
+      - scp -o StrictHostKeyChecking=no -i devops.pem -r * ec2-user@IP_EC2:/var/www/html/app
